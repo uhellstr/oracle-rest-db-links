@@ -4,7 +4,7 @@ How to use REST enabled objects using Oracle Rest Data Services instead of tradi
 
 ## This is a framework to help you create DDL based oracle views that transforms JSON objects called over Oracle Rest Data Services to relational Oracle views.
 
-This framework was created to prove that you can use Oracle Rest Data Services (ORDS) isntead of traditional database links to enable to not only communicate between databases but also since data is fetched as a REST based service not depend on database links that are closed inside the Oracle database.
+This framework was created to prove that you can use Oracle Rest Data Services (ORDS) instead of traditional database links to enable to not only communicate between databases but also since data is fetched as a REST based service not depend on database links that are closed inside the Oracle database.
 
 Using REST-based enabled objects not only mean we can commmunicate between Oracle databases but between Oracle an anything that understans JSON.
 
@@ -15,6 +15,39 @@ The traditional way of doing this is to create a database link in PROD2 that poi
 First of all databaselinks needs TNS-aliases, they need username and password for the schema in PROD1 and they can only be created by the schema that should own the database link. Many databaselinks and many database and a DBA has a minor headache. Think password policies etc. They are a nightmare to handle in pipeline builds etc. So is there another way of fetching data from one source to another. Yes, there is a technology that is used allot in the mid-tier applications called RESTful API. Oracle has supported this technology for years using a technology called Oracle Rest Data Services (ORDS).
 
 Using ORDS instead of databaselinks means that we open up the database not only for communicating between databases in the Oracle Technology stack but to the outside world and the configuration of ORDS is not so hardcoded into the database and the DBA do not have to handle database links when password changes etc.
+
+This repository includes PL/SQL code that helps you generate DDL for a selecable Oracle view that fetches the data over REST.
+
+The way to do this that I prefere is the following:
+
+* IN PROD1 we have the CUSTOMERS table in a schema called PRODDATA. We should never, ever rest enable this object directly!! The data should never be accessed directly in the schema that owns the table
+* Instead in PROD1 we create a access schema for allowing external access. Let's call this schema REST_ACCESS_API.
+* We then grant select on PRODDATA.CUSTOMERS to the schema REST_ACCESS_API.
+* In the schema REST_ACCESS_API we create a view called CUSTOMERS_REST_V
+* We configure Oracle ORDS to allow "Rest Enabled SQL" against PROD1 on the node "myords.myorg.com"
+* From SQL*Developer or directly using PL/SQL we REST enable the schema object REST_ACCESS_API.CUSTOMERS_REST_V
+* From a browswer we check that we can fetch data over REST (The URL looks something like http[s]://myords.myorg.com:8080/ords/prod1/rest_acess_api/customers_rest_v)
+ * In PROD2 we install the API in this repository. The default schema for this is REST_DB_LINK_API.
+  
+We now can generate DDL for a selectable view with the helper PL/SQL package RGENERATOR_PKG as follows.
+  
+set define off
+set serveroutput on
+begin
+   rgenerator_pkg.generator
+          (
+            p_in_viewname => 'customers_rest_view'
+            ,p_in_metaurl => 'http://myords.myorg.com:8080/ords/prod1/rest_access_api/metadata-catalog/customers_rest_v/'
+            ,p_in_metaparams => '?limit=1000'
+           );
+end;
+/
+
+This will output the DDL that you can copy and run locally to create the view that fetches data over REST and transforms the JSON document to relational data.
+If everyting works after running the DDL output from above you should now be able to do the following select in a schema in PROD2.
+
+select * from [schema].customers_rest_view
+
 
 ## Is this technology a total replacement for database links ?
 The answer to that is NO. There are situations where databas links still is needed or you have choosen the wrong way of doing things. Fetching 1000 000 rows of data over a database link might not be fast but you fetch only the data. If you use REST to fetch the same amount of data you not only fetch the data itself since it will bel included in a huge JSON document. You vill fetch more over the network with REST then with traditional database links. So there might be situations where the database links outperform REST in such way that REST is not suitable. But REST uses filters just as normal SQL uses WHERE so if you can filter your data in your REST call to fetch as little data as possible it still can perform really well even with larger sets of data.
@@ -38,3 +71,4 @@ https://oracle-base.com/misc/site-info
 
 Tim Hall has a whole section about how to install and configure ORDS at https://oracle-base.com/articles/misc/articles-misc#ords
 
+# Detailed instructions on how to install the PL/SQL API and how to use it is documentened in the README.md document in the install subdirectory.
