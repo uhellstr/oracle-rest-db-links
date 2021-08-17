@@ -4,7 +4,7 @@ How to use REST enabled objects using Oracle Rest Data Services instead of tradi
 
 ## This is a PL/SQL API to help you create DDL based oracle views that transforms JSON objects called over Oracle Rest Data Services to relational selectable ONLY Oracle views.
 
-This framework was created to prove that you can use Oracle Rest Data Services (ORDS) instead of traditional database links to enable not only communicate between databases but also since data is fetched as a REST based service not depend on database links that are closed inside the Oracle database.
+This framework was created to prove that you can use Oracle Rest Data Services (ORDS) instead of traditional database links to enable not only communication between  Oracle databases but also since we use REST from Oracle to anything that understans JSON and rest calls. That opens up usage of Python, Notebooks other databases like Postgres without the usage of Hetereogenous Services etc.
 
 Using REST-based enabled objects not only mean we can commmunicate between Oracle databases but between Oracle an anything that understans JSON.
 
