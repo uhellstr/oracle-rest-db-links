@@ -25,3 +25,15 @@ The answer to that is NO. There are situations where databas links still is need
 * You should choose the latest version of ORDS from Oracle Technology Network and if you are using a older version upgrade to the latest version. There's been allot of optimization in the ORDS 20.x versions when it comes to fetching data over REST.
 * If you already have ORDS installed but only configured for APEX you need to re-do the configuration against the database you wish to REST enable. It is not enough to install over the older installation. To reinstall use the uninstall option and then re-run the configuration and choose either option 1 or 2 above. Just rerun the configuration will not REST enable the configuration. 
 
+## Where should i install ORDS ?
+
+You have several opations availible
+* In a local environment like youre own developer PC with Oracle installed you can install it as a standalone option on the developer PC directly. 
+* You can install it on the same server as where Oracle software and database lives but that is not recommended unless it is development or smaller test envrionments.
+* Preferely you install it on a separate server so that CPU-power is used only for ORDS. You can install it as a standalone or deploy your ORDS configuration to Tomcat
+* If you install ORDS in a production environment you should protect the traffic using SSL and setup the configuration using https:// else everything is sent in clear text over the newtork. ORDS can use certificates from Let's Encrypt.
+
+For more details about installing and configuring ORDS i recommend you look at official Oracle documentation or have a look at Tim Hall's 
+https://oracle-base.com/misc/site-info
+He has a whole section about how to install and configure ORDS.
+
