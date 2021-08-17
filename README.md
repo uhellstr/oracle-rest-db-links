@@ -8,3 +8,4 @@ This framework was created to prove that you can use Oracle Rest Data Services (
 
 Using REST-based enabled objects not only mean we can commmunicate between Oracle databases but between Oracle an anything that understans JSON.
 
+#How to install ?
