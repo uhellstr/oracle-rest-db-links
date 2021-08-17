@@ -18,7 +18,7 @@ The difference is that i have choosed to write i DDL generator in PL/SQL instead
 ## Concept
 
 We have a database named PROD1. In that database we have a table named CUSTOMERS that we need to join with data in daabase PROD2. 
-The traditional way of doing this is to create a database link in PROD2 that points to the schema thatthe CUSTOMER table belongs too.
+The traditional way of doing this is to create a database link in PROD2 that points to the schema CUSTOMER table belongs too in PROD1.
 First of all databaselinks needs TNS-aliases, they need username and password for the schema in PROD1 and they can only be created by the schema that should own the database link. Many databaselinks and many database and a DBA has a minor headache. Think password policies etc. They are a nightmare to handle in pipeline builds etc. So is there another way of fetching data from one source to another. Yes, there is a technology that is used allot in the mid-tier applications called RESTful API. Oracle has supported this technology for years using a technology called Oracle Rest Data Services (ORDS).
 
 Using ORDS instead of databaselinks means that we open up the database not only for communicating between databases in the Oracle Technology stack but to the outside world and the configuration of ORDS is not so hardcoded into the database and the DBA do not have to handle database links when password changes etc.
