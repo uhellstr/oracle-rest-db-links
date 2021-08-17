@@ -8,6 +8,12 @@ This framework was created to prove that you can use Oracle Rest Data Services (
 
 Using REST-based enabled objects not only mean we can commmunicate between Oracle databases but between Oracle an anything that understans JSON.
 
+The work I have done is based on Robert Marz and his presentation at https://youtu.be/z7RZBV3yVAE and his github repository at https://github.com/its-people/rest-db-links.git
+I have re-used most of the code he uses in ret_db_link but has fixed one or two bugs that prevented columns like 'ID' or 'UR* from working.
+The difference is that i have choosed to write i DDL generator in PL/SQL instead of Java Script that he uses in his generator. Pleas have a look at the spledid work Robert did a couple of years ago to demonstrate the possibilites of using REST as a replacement or in combination with traditional database links.
+
+
+
 ## Concept
 
 We have a database named PROD1. In that database we have a table named CUSTOMERS that we need to join with data in daabase PROD2. 
