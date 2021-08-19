@@ -32,5 +32,8 @@ Note: REST_DB_LINK_API will have the password REST_DB_LINK_API by default. After
 SQL> alter user REST_DB_LINK_API identified by "your_secret_and_secure_password";
 ```
 
-
+The package REST_DB_LINK_API.REST_DB_LINKS will grant with execute permissions against the PUBLIC schema by defalt so anyone can call this package.
+If you do not want it be directly granted to all schemas in your database you will have to revoke this pemission and then manually grant
+execute on REST_DB_LINK_API.REST_DB_LINKS to any schema that will create one or several REST based Oracle view since this package is called by
+any such view to be able to parse and convert JSON to a relational view.
 
