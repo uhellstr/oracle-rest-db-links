@@ -26,7 +26,7 @@ SQL>@run_me.sql
 ``` 
 
 The script needs to setup Access Control List (ACL) to allow http call to the server where ORDS is installed. During the installation you will be prompted
-for the address to this ORDS server. Input should be servername[.domaim] or ip-number to the server where ORDS is installed. If ORDS is installed on your 
+for the address to this ORDS server. Input should be servername[.domain] or ip-number to the server where ORDS is installed. If ORDS is installed on your 
 local machine you give 127.0.0.1 or localhost as answer else use IP or fullname of the server.
 
 Note: REST_DB_LINK_API will have the password REST_DB_LINK_API by default. After installation you should change this password immediate by
