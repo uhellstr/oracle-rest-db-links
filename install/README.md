@@ -10,13 +10,13 @@ In the database you want to fetch data from above install the PL/SQL API below. 
 
 # How to install the REST "database link" API.
 
-In every database you plan to create one or several restbased view to fetch data from remote instance you should install the schema REST_DB_LINK_API.
+In every database you plan to create one or several restbased view(s) to fetch data from a remote rest enabled object you should install the schema REST_DB_LINK_API.
 
 The installation will create the following
 
 * A new schema called REST_DB_LINK_API.
 * In REST_DB_LINK_API the PL/SQL package REST_DB_LINKS (This package is used by every generated Oracle view that calls data over REST calls).
-* In REST_DB_LINK_API the PL/SQL package RGENERATOR_PKG (This package is used by a developer to help to generate for rest based Oracle view.)
+* In REST_DB_LINK_API the PL/SQL package RGENERATOR_PKG (This package is used by a developer to help to generate DDL for a rest based Oracle view.)
 
 To install the API run the following sql script using SYS or INTERNAL or a user with necessary granted permissions (create user, access to ACL packages..) etc.
 
