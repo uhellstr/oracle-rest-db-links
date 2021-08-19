@@ -1,9 +1,9 @@
 # Model for usage
 
-In the database where you want to expose data for rest callz use the following model. (e.g in the master example this is database PROD1)
+In the database where you want to expose data for rest calls use the following model. (e.g in the master example this is database PROD1)
 
-* Never expose a table or view direcly from a schema that owns data. Instead create a separate access schema and grant select on underlying tables or views to this access schema. The access schema should ONLY be used for exposing rest enabled objects.
-* In the access schema you granted select to create views on the underlying objects with SELECT permissions ONLY.
+* Never expose a table or view direcly from a schema that owns data the table or view. Instead create a separate "access" schema used for objects you want to rest enable and grant select on underlying tables or views to that schema. The "access" schema should ONLY be used for exposing rest enabled objects.
+* In the "access" schema you granted select to create views on the underlying objects with SELECT/READONLY permissions ONLY.
 * Use SQL*Developer to REST enable your objects in the access schema. Again you can check Tim Hall's site for example on how to rest enable objects directly from PL/SQL.
 
 In the database you want to fetch data from above install the PL/SQL API below. (e.g in the master example this is database PROD2)
