@@ -86,4 +86,4 @@ https://oracle-base.com/misc/site-info
 
 Tim Hall has a whole section about how to install and configure ORDS at https://oracle-base.com/articles/misc/articles-misc#ords
 
-# Detailed instructions on how to install the PL/SQL API and how to use it is documentened in the README.md document in the install subdirectory.
+Detailed instructions on how to install the PL/SQL is documentened in the README.md document in the install subdirectory.
