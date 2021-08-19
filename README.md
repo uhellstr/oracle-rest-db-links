@@ -38,18 +38,19 @@ The way to do this is described conceptual below:
   
 We now can generate DDL for a selectable view in PROD2 with the helper PL/SQL package RGENERATOR_PKG as follows.
 
-
-  set define off
-  set serveroutput on
-  begin
-     rgenerator_pkg.generator
+```
+set define off
+set serveroutput on
+begin
+  rgenerator_pkg.generator
             (
               p_in_viewname => 'customers_rest_view'
               ,p_in_metaurl => 'http://myords.myorg.com:8080/ords/prod1/rest_access_api/metadata-catalog/customers_rest_v/'
               ,p_in_metaparams => '?limit=1000'
              );
-  end;
-  /
+end;
+/
+```
 
 This will output the DDL that you can copy and run locally to create the view that fetches data over REST and transforms the JSON document to relational data.
 If everyting works after running the DDL output from above you should now be able to do the following select in a schema in PROD2.
