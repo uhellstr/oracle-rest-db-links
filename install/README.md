@@ -107,4 +107,4 @@ If you fetch allot of data over rest you can modify the output from above the ab
 
 # Final note:
 
-Not all datatypes are supported for REST calls. THe package above will handle all standard types as VARCHAR2,NUMBER and DATE types. CHAR vill be converted to VARCHAR2 since json do not support CHAR. Datatypes as LOB's are not supported.
+Not all datatypes are supported for REST calls. The package above will handle all standard types as VARCHAR2,NUMBER and DATE and TIMESTAMP data types. CHAR vill be converted to VARCHAR2 since json do not support CHAR. Datatypes as LOB's are not supported. For more information what datatypes are supported by JSON see the ORDS documentation.
