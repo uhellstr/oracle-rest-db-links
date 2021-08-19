@@ -101,7 +101,7 @@ end;
 /
 ```
 
-For more information on how to use ORDS filtering (works like WHERE in SQL to filter data) see the Oracle Documentation for Oracle Rest Data Services.
+For more information on how to use ORDS filtering (works like WHERE in SQL to filter data) see the Oracle Documentation for Oracle Rest Data Services or google on "Oracle Rest Data Services filter".
 
 If you fetch allot of data over rest you can modify the output from above the above from CREATE VIEW to CREATE MATERIALIZED view and add statements to allow for regular or manual refresh. This can increase performance allot if you do joins on the local side since you no longer need to fetch data over the network for each join done.
 
