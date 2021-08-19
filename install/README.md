@@ -18,9 +18,12 @@ The installation will create the following
 * In REST_DB_LINK_API the PL/SQL package REST_DB_LINKS (This package is used by every generated Oracle view that calls data over REST calls).
 * In REST_DB_LINK_API the PL/SQL package RGENERATOR_PKG (This package is used by a developer to help to generate for rest based Oracle view.)
 
-To install the API run the following sql script using SYS or INTERNAL or a user with necessary granted permissions (create user) etc.
+To install the API run the following sql script using SYS or INTERNAL or a user with necessary granted permissions (create user, access to ACL packages..) etc.
 
-run_me.sql
+```
+SQL>conn sys@<TNS-ALIAS> as sysdba 
+SQL>@run_me.sql
+``` 
 
 The script needs to setup Access Control List (ACL) to allow http call to the server where ORDS is installed. During the installation you will be prompted
 for the address to this ORDS server. Input should be servername[.domaim] or ip-number to the server where ORDS is installed. If ORDS is installed on your 
