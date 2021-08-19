@@ -37,7 +37,8 @@ The way to do this is described conceptual below:
  * In PROD2 we install the API in this repository. The default schema for this is REST_DB_LINK_API.
   
 We now can generate DDL for a selectable view in PROD2 with the helper PL/SQL package RGENERATOR_PKG as follows.
-
+Using the example URL above (http://myords.myorg.com:8080/ords...) we can construct an example call to the
+RGENERATOR PL/SQL package in REST_ACCESS_API as in the example below.
 
 ```
 set define off
