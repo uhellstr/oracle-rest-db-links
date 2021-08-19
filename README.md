@@ -49,7 +49,7 @@ begin
             ,p_in_metaparams => '?limit=1000'
            );
 end;
-</code>
+
 
 This will output the DDL that you can copy and run locally to create the view that fetches data over REST and transforms the JSON document to relational data.
 If everyting works after running the DDL output from above you should now be able to do the following select in a schema in PROD2.
