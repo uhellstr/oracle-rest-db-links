@@ -56,9 +56,10 @@ end;
 /
 ```
 
-In this fictional example have a schema called REST_ACCES_API with a view called customers_v in the database PROD1.
-ORDS is configured and we can test call the URL to access the data in customers_v view in PROD1
-In PROD2 we now want to generate a rest based Oracle view that fetches the data from cusomers_v in PROD1.
+* In this fictional example we have a schema called REST_ACCES_API with a view called customers_v in the database PROD1.
+* ORDS is configured and we can test call the URL to access the data in customers_v view in PROD1.
+* In PROD2 we now want to generate a rest based Oracle view that fetches the data from cusomers_v in PROD1.
+* 
 Using the RGENERATOR_PKG described above we can genereate and then run the DDL for a view called customers_rest_view in PROD2 by calling the package above as.
 
 ```
