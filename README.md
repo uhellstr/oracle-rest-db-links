@@ -17,7 +17,7 @@ The difference is that i have choosed to write i DDL generator in PL/SQL instead
 
 ## Concept
 
-We have a database named PROD1. In that database we have a table named CUSTOMERS that we need to join with data in daabase PROD2. 
+We have a database named PROD1. In that database we have a table named CUSTOMERS that we need to join with data in database PROD2. 
 The traditional way of doing this is to create a database link in PROD2 that points to the schema CUSTOMER table belongs too in PROD1.
 First of all databaselinks needs TNS-aliases, they need username and password for the schema in PROD1 and they can only be created by the schema that should own the database link. Many databaselinks and many database and a DBA has a minor headache. Think password policies etc. They are a nightmare to handle in pipeline builds etc. So is there another way of fetching data from one source to another. Yes, there is a technology that is used allot in the mid-tier applications called RESTful API. Oracle has supported this technology for years using a technology called Oracle Rest Data Services (ORDS).
 
@@ -25,9 +25,9 @@ Using ORDS instead of databaselinks means that we open up the database not only 
 
 This repository includes PL/SQL code that helps you generate DDL for a selecable Oracle view that fetches the data over REST.
 
-The way to do this that I prefere is the following:
+The way to do this is described conceptual below:
 
-* IN PROD1 we have the CUSTOMERS table in a schema called PRODDATA. We should never, ever rest enable this object directly!! The data should never be accessed directly in the schema that owns the table
+* IN PROD1 we have the CUSTOMERS table in a schema called PRODDATA. We should never, ever rest enable this object directly!! The data should never be accessed directly in the schema that owns the table.
 * Instead in PROD1 we create a access schema for allowing external access. Let's call this schema REST_ACCESS_API.
 * We then grant select on PRODDATA.CUSTOMERS to the schema REST_ACCESS_API.
 * In the schema REST_ACCESS_API we create a view called CUSTOMERS_REST_V
@@ -36,7 +36,7 @@ The way to do this that I prefere is the following:
 * From a browswer we check that we can fetch data over REST (The URL looks something like http[s]://myords.myorg.com:8080/ords/prod1/rest_acess_api/customers_rest_v)
  * In PROD2 we install the API in this repository. The default schema for this is REST_DB_LINK_API.
   
-We now can generate DDL for a selectable view with the helper PL/SQL package RGENERATOR_PKG as follows.
+We now can generate DDL for a selectable view in PROD2 with the helper PL/SQL package RGENERATOR_PKG as follows.
   
 set define off
 set serveroutput on
@@ -54,6 +54,8 @@ This will output the DDL that you can copy and run locally to create the view th
 If everyting works after running the DDL output from above you should now be able to do the following select in a schema in PROD2.
 
 select * from [schema].customers_rest_view
+
+If you test to use the URL used in the PL/SQL block above (after changing it to work in your environment) in a webbrowser like Firefox,Safari or Google Chromer that calls ORDS metadata catalog you will see that it will give you a description over the columns and datatypes used in the the object you access.
 
 
 ## Is this technology a total replacement for database links ?
