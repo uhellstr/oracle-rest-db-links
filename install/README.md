@@ -48,8 +48,8 @@ set serveroutput on
 begin
   rgenerator_pkg.generator
             (
-              p_in_viewname => '<name of the rest based oracle view>'
-              ,p_in_metaurl => '<ORDS URL to remote rest enabled object>'
+              p_in_viewname => '<name of the local rest based oracle view>'
+              ,p_in_metaurl => '<ORDS URL to the remote rest enabled object metadata-catalog>'
               ,p_in_metaparams => <filter parameters for filtering data and limit on how many rows to call per roundtrip (without limit only 25 rows per trip).>
              );
 end;
