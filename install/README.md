@@ -1,6 +1,14 @@
+# Model for usage
+
+In the database where you want to expose data for rest call use the following model.
+
+* Never expose a table or view direcly from a schema that owns data. Instead create a separate access schema and grant select on underlying tables or views to this access schema. The access schema should ONLY be used for exposing rest enabled objects.
+* In the schema you granted select to create views on the underlying objects with SELECT permissions ONLY.
+* Use SQL*Developer to REST enable your objects in the access schema.
+
 # How to install the REST "database link" API.
 
-In every database you plan to create a restbaseed view to fetch data from remote instance you should install the schema REST_DB_LINK_API.
+In every database you plan to create one or several restbased view to fetch data from remote instance you should install the schema REST_DB_LINK_API.
 
 The installation will create the following
 
