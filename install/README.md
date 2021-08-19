@@ -105,3 +105,6 @@ For more information on how to use ORDS filtering (works like WHERE in SQL to fi
 
 If you fetch allot of data over rest you can modify the output from above the above from CREATE VIEW to CREATE MATERIALIZED view and add statements to allow for regular or manual refresh. This can increase performance allot if you do joins on the local side since you no longer need to fetch data over the network for each join done.
 
+# Final note:
+
+Not all datatypes are supported for REST calls. THe package above will handle all standard types as VARCHAR2,NUMBER and DATE types. CHAR vill be converted to VARCHAR2 since json do not support CHAR. Datatypes as LOB's are not supported.
