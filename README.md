@@ -37,6 +37,8 @@ The way to do this is described conceptual below:
  * In PROD2 we install the API in this repository. The default schema for this is REST_DB_LINK_API.
   
 We now can generate DDL for a selectable view in PROD2 with the helper PL/SQL package RGENERATOR_PKG as follows.
+Use SQL*Developer or SQLcmd to generate the output (generated with DBMS_OUTPUT). Copy the output for the create view statement
+and paste it in your prefered environment.
 
 ```
 set define off
