@@ -5,7 +5,7 @@ In the database where you want to expose data for rest calls use the following m
 * Never expose a table or view direcly from a schema that owns data the table or view. Instead create a separate "access" schema used for objects you want to rest enable and grant select on underlying tables or views to that schema. The "access" schema should ONLY be used for exposing rest enabled objects.
 * In the "access" schema you granted select to create views on the underlying objects with SELECT/READONLY permissions.
 * Use SQL*Developer to REST enable your objects in the access schema. Again you can check Tim Hall's site (See the master README.md for this repository) for example on how to rest enable objects directly from PL/SQL.
-* The user REST_DB_LINK_API that is crated has no specified default tablespace. You should verify that your database has a default tablespace defined as
+* The user REST_DB_LINK_API that is created has no specified default tablespace. You should verify that your database has a default tablespace defined as
 
 ```
 alter database default tablespace <tablespace_name>;
