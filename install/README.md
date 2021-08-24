@@ -12,11 +12,10 @@ alter database default tablespace <tablespace_name>;
 ```
 
 
-In the database you want to fetch data from above install the PL/SQL API below. (e.g in the master example this is database PROD2)
-
 # How to install the REST "database link" API.
 
 In every database you plan to create one or several restbased view(s) to fetch data from a remote rest enabled object you should install the schema REST_DB_LINK_API.
+In the examle in the master README.md for this repository the API should be installed in PROD2
 
 The installation will create the following
 
@@ -52,7 +51,7 @@ When API is installed you can generate the DDL for a REST based Oracle view usin
 set define off
 set serveroutput on
 begin
-  rgenerator_pkg.generator
+  rest_db_link_api.rgenerator_pkg.generator
             (
               p_in_viewname => '<name of the local rest based oracle view>'
               ,p_in_metaurl => '<ORDS URL to the remote rest enabled object metadata-catalog>'
@@ -72,7 +71,7 @@ Using the RGENERATOR_PKG described above we can genereate and then run the DDL f
 set define off
 set serveroutput on
 begin
-  rgenerator_pkg.generator
+  rest_db_link_api.rgenerator_pkg.generator
             (
               p_in_viewname => 'customers_rest_view'
               ,p_in_metaurl => 'http://myords.myorg.com:8080/ords/prod1/rest_access_api/metadata-catalog/customers_v/'
@@ -98,7 +97,7 @@ The parameter p_in_metaparams supports the usage of ORDS filtering. This can inc
 set define off
 set serveroutput on
 begin
-  rgenerator_pkg.generator
+  rest_db_link_api.rgenerator_pkg.generator
             (
               p_in_viewname => 'customers_rest_view'
               ,p_in_metaurl => 'http://myords.myorg.com:8080/ords/prod1/rest_access_api/metadata-catalog/customers_v/'
