@@ -88,7 +88,7 @@ The answer to that is NO. There are situations where databas links still is need
 
 ## Read consistancy.
 
-REST is also stateless it is not a read-consistant transaction. Let's say you want to fetch 500 000 rows. With REST you fetch the data in batches like 1000 rows of data per call. Someone could update some data further down in the fetch train and that could cause you logical corruption. It is not safe to asume that the millisecond you started to fetch the 500 000 rows you will get exactly the data that was in the remote table the millisecond you started to fetch the rows over REST. There is ways to get ORDS to guarantee that by passing som options in the call over REST but do not misstake stateless REST calls for Oracle read-consistant selects.
+REST is also stateless it is not a read-consistant transaction. Let's say you want to fetch 500 000 rows. With REST you fetch the data in batches like 1000 rows of data per call. Someone could update some data further down in the fetch train and that could cause you logical corruption. It is not safe to asume that the millisecond you started to fetch the 500 000 rows you will get exactly the data that was in the remote table the millisecond you started to fetch the rows over REST. There is ways to get ORDS to guarantee that by passing som options in the call over REST but do not misstake stateless REST calls for Oracle read-consistant selects. (This is one thing that is in a future update for this API to be able to handle.)
 
 ## What do i need to do before installing this framework ?
 
