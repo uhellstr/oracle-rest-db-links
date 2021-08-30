@@ -61,6 +61,27 @@ select * from [schema].customers_rest_view
 
 If you test to use the URL used in the PL/SQL block above (after changing it to work in your environment) in a webbrowser like Firefox,Safari or Google Chromer that calls ORDS metadata catalog you will see that it will give you a description over the columns and datatypes used in the the object you access.
 
+## Get help formatting date, number and timestamps
+
+There's another parameter that might help out with formatting data like number and dates if you get them in incorrect format you can add the parameter
+p_in_format_datatypes that is a boolean type that by default is set to false.
+
+```
+set define off
+set serveroutput on
+begin
+  rgenerator_pkg.generator
+            (
+              p_in_viewname => 'customers_rest_view'
+              ,p_in_metaurl => 'http://myords.myorg.com:8080/ords/prod1/rest_access_api/metadata-catalog/customers_rest_v/'
+              ,p_in_metaparams => '?limit=1000'
+              ,p_in_format_datatypes => true
+             );
+end;
+/
+```
+
+The extra parameter vill add som formatting options. You might need to look at the DDL and change some formatting to be compatible with your own locale.
 
 ## Is this technology a total replacement for database links ?
 The answer to that is NO. There are situations where databas links still is needed. Fetching 1000 000 rows of data over a database link might not be fast but you fetch only the data. If you use REST to fetch the same amount of data you not only fetch the data itself since it will be included in a huge JSON document. You vill fetch more over the network with REST then with traditional database links. So there might be situations where the database links outperform REST in such way that REST is not suitable. But REST uses filters just as normal SQL uses WHERE so if you can filter your data in your REST call to fetch as little data as possible it still can perform really well even with larger sets of data.
