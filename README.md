@@ -13,6 +13,7 @@ I have re-used most of the code he uses in rest_db_link pl/sql code but has fixe
 done some work around handling unicode correctly.
 The difference is that i have choosed to write i DDL generator in PL/SQL instead of Java Script that Robert uses in his generator. Please have a look at the splendid work Robert did a couple of years ago to demonstrate the possibilites of using REST as a replacement or in combination with traditional database links.
 
+The API's Generator supports generating view code based on tables and views only today.
 
 ## Concept
 
