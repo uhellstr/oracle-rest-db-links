@@ -65,7 +65,34 @@ If you test to use the URL used in the PL/SQL block above (after changing it to 
 ## Get help formatting date, number and timestamps
 
 There's another parameter that might help out with formatting data like number and dates if you get them in incorrect format you can add the parameter
-p_in_format_datatypes that is a boolean type that by default is set to false.
+p_in_format_datatypes that is a boolean type that by default is set to true. This means this is optional only if you want to handle DATE and TIMESTAMP columns by
+yourself.
+
+Note: By default JSON will convert all Oracle DATE and TIMESTAMP to UTC. For me living in sweden it means that it will show dates incorrectly with -2 hours and
+for DATES without timepart like '2021-09-06 00:00:00' the DATE instead would be '2021-09-05 22:00:00' if I choosed to set p_in_metaparams => false.
+
+RGENERATOR package will default DATE formatting to RRRR-MM-DD HH24:MI:SS and RRRR-MM-DD HH24:MI:SS.FXFF3 by default.
+If you format you DATE's and TIMESTAMP you have to change the variables 
+
+```
+lv_dateutcformat varchar2(100) := 'FXRRRR-MM-DD"T"HH24:MI:SS"Z"';
+```
+and
+```
+lv_timeutcformat varchar2(100) := 'FXRRRR-MM-DD"T"HH24:MI:SS.FXFF3"Z"';
+```
+
+In the function
+```
+function gen_datatype_format
+            (
+              p_in_colname in varchar2
+              ,p_in_datatype in varchar2
+             ) return varchar2
+```
+
+So it conforms to your standards.. or you set the parameter p_in_metaparams => false and do all the conversions yourself.
+Check the return from the restbased view's JSON to see how your date format is handled in JSON!
 
 ```
 set define off
