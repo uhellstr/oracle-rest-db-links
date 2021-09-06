@@ -62,17 +62,19 @@ select * from [schema].customers_rest_view
 
 If you test to use the URL used in the PL/SQL block above (after changing it to work in your environment) in a webbrowser like Firefox,Safari or Google Chromer that calls ORDS metadata catalog you will see that it will give you a description over the columns and datatypes used in the the object you access.
 
-## Get help formatting date, number and timestamps
+## Get help formatting date and timestamps
 
 There's another parameter that might help out with formatting data like number and dates if you get them in incorrect format you can add the parameter
 p_in_format_datatypes that is a boolean type that by default is set to true. This means this is optional only if you want to handle DATE and TIMESTAMP columns by
 yourself.
 
-Note: By default JSON will convert all Oracle DATE and TIMESTAMP to UTC. For me living in sweden it means that it will show dates incorrectly with -2 hours and
-for DATES without timepart like '2021-09-06 00:00:00' the DATE instead would be '2021-09-05 22:00:00' if I choosed to set p_in_metaparams => false.
+Note: By default JSON will convert all Oracle DATE and TIMESTAMP to UTC. For me living in Sweden it means that it will show dates incorrectly with -2 hours and
+for DATES without timepart like '2021-09-06 00:00:00' the DATE would end up as '2021-09-05 22:00:00' if I choosed to set p_in_metaparams => false.
 
-RGENERATOR package will default DATE formatting to RRRR-MM-DD HH24:MI:SS and RRRR-MM-DD HH24:MI:SS.FXFF3 by default.
-If you format you DATE's and TIMESTAMP you have to change the variables 
+RGENERATOR package will default DATE formatting to RRRR-MM-DD HH24:MI:SS and RRRR-MM-DD HH24:MI:SS.FXFF3.
+If you live in a locale with other standards for formatting dates and timestamps you need to change some variables.
+
+The following variables are hard coded to settings that is complaint with Sweden.
 
 ```
 lv_dateutcformat varchar2(100) := 'FXRRRR-MM-DD"T"HH24:MI:SS"Z"';
@@ -94,6 +96,8 @@ function gen_datatype_format
 So it conforms to your standards.. or you set the parameter p_in_metaparams => false and do all the conversions yourself.
 Check the return from the restbased view's JSON to see how your date format is handled in JSON!
 
+If you want to call the parameter yourself the syntax is (e.g to turn it off): 
+
 ```
 set define off
 set serveroutput on
@@ -103,13 +107,13 @@ begin
               p_in_viewname => 'customers_rest_view'
               ,p_in_metaurl => 'http://myords.myorg.com:8080/ords/prod1/rest_access_api/metadata-catalog/customers_rest_v/'
               ,p_in_metaparams => '?limit=1000'
-              ,p_in_format_datatypes => true
+              ,p_in_format_datatypes => false
              );
 end;
 /
 ```
 
-The extra parameter vill add som formatting options. You might need to look at the DDL and change some formatting to be compatible with your own locale.
+As stated you might need to look at the DDL and change some formatting to be compatible with your own locale.
 
 ## Is this technology a total replacement for database links ?
 The answer to that is NO. There are situations where databas links still is needed. Fetching 1000 000 rows of data over a database link might not be fast but you fetch only the data. If you use REST to fetch the same amount of data you not only fetch the data itself since it will be included in a huge JSON document. You vill fetch more over the network with REST then with traditional database links. So there might be situations where the database links outperform REST in such way that REST is not suitable. But REST uses filters just as normal SQL uses WHERE so if you can filter your data in your REST call to fetch as little data as possible it still can perform really well even with larger sets of data.
