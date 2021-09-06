@@ -71,7 +71,7 @@ yourself.
 Note: By default JSON will convert all Oracle DATE and TIMESTAMP to UTC. For me living in Sweden it means that it will show dates incorrectly with -2 hours and
 for DATES without timepart like '2021-09-06 00:00:00' the DATE would end up as '2021-09-05 22:00:00' if I choosed to set p_in_metaparams => false.
 
-RGENERATOR package will default DATE formatting to RRRR-MM-DD HH24:MI:SS and RRRR-MM-DD HH24:MI:SS.FXFF3.
+RGENERATOR_PKG PL/SQL package will default DATE formatting to RRRR-MM-DD HH24:MI:SS and RRRR-MM-DD HH24:MI:SS.FXFF3.
 If you live in a locale with other standards for formatting dates and timestamps you need to change some variables.
 
 The following variables are hard coded to settings that is complaint with Sweden.
