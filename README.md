@@ -36,7 +36,7 @@ The way to do this is described conceptual below:
 * We configure Oracle ORDS to allow "Rest Enabled SQL" against PROD1 on the node "myords.myorg.com"
 * From SQL*Developer or directly using PL/SQL we REST enable the schema object REST_ACCESS_API.CUSTOMERS_REST_V
 * From a browser we check that we can fetch data over REST (The URL looks something like http[s]://myords.myorg.com:8080/ords/prod1/rest_acess_api/customers_rest_v)
- * In PROD2 we install the API in this repository. The default schema for this is REST_DB_LINK_API.
+* In PROD2 we install the API in this repository. The default schema for this is REST_DB_LINK_API.
   
 We now can generate DDL for a selectable view in PROD2 with the helper PL/SQL package RGENERATOR_PKG as follows.
 Using the example URL above (http://myords.myorg.com:8080/ords...) we can construct an example call to the
@@ -126,7 +126,9 @@ REST is also stateless it is not a read-consistant transaction. Let's say you wa
 ## What do i need to do before installing this framework ?
 
 * You need to have ORDS installed and configured against the database you wish to fetch data from and it has to be configured with "   [1] SQL Developer Web  (Enables all features)" or "[2] REST Enabled SQL" options choosed.
+
 * You should choose the latest version of ORDS from Oracle Technology Network and if you are using a older version upgrade to the latest version. There's been allot of optimization in the ORDS 20.x versions when it comes to fetching data over REST.
+
 * If you already have ORDS installed but only configured for APEX you need to re-do the configuration against the database you wish to REST enable. It is not enough to install over the older installation. To reinstall use the uninstall option and then re-run the configuration and choose either option 1 or 2 above. Just rerun the configuration will not REST enable the configuration. This might change in the future so always check the latest documentation for ORDS.
 
 ## Where do I install ORDS ?
