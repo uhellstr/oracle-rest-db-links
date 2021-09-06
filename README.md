@@ -93,7 +93,7 @@ function gen_datatype_format
              ) return varchar2
 ```
 
-So it conforms to your standards.. or you set the parameter p_in_metaparams => false and do all the conversions yourself.
+So, you might need to alter those variables in the code or set the parameter p_in_metaparams => false and do all the conversions yourself.
 Check the return from the restbased view's JSON to see how your date format is handled in JSON!
 
 If you want to call the parameter yourself the syntax is (e.g to turn it off): 
