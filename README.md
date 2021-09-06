@@ -23,6 +23,7 @@ First of all databaselinks needs TNS-aliases, they need username and password fo
 Yes, there is a technology that is used allot in the mid-tier applications called RESTful API. Oracle has supported this technology for years using a technology called Oracle Rest Data Services (ORDS).
 
 Using ORDS instead of databaselinks means that we open up the database not only for communicating between databases in the Oracle Technology stack but to the outside world and the configuration of ORDS is not so hardcoded into the database and the DBA do not have to handle database links when password changes etc.
+Also we only expose objects we choose to expose. A database link against a schema will expose all objects in that schema. With Oracle Rest Data Services you expose only the objects that you choose to enable for REST.
 
 This repository includes PL/SQL code that helps you generate DDL for a selecable Oracle view that fetches the data over REST.
 
